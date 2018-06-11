@@ -2,12 +2,28 @@
 <html>
 <head>
 <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CityLens - the new way to discover your city</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+    
+    <link rel="stylesheet" href="leaflet.magnifyingglass.css" />
+    <style>
+        html, body {
+            height: 100%;
+        }
+    #map {
+        width:100%;
+        height:600px;
+    }
+    </style>
+    
+    <script src="leaflet.magnifyingglass.js"></script>
+    <script src="citylens.js"></script>
 </head>
+
 <body>
-Hier entsteht die App CityLens. Dies ist nur ein Platzhalter. Whoopwhoop. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+ <div id="map"></div>
 </body>
 </html>
