@@ -8,14 +8,22 @@ function init() {
   };
 var locationLatLng = [0.0, 0.0];
 
-  var map = new L.Map('map', {
+var map = new L.map('map', {
     center: [50.9794934, 11.3235439],
     zoom: 16,
     layers: [
       L.tileLayer(tileUrl, tileOptions)
     ]
-  });
+  }); 
+  
+   L.easyButton('fa-bicycle', function(){
+		alert('You just clicked a font awesome icon');
+	}).addTo(map);
 
+	   L.easyButton('fa-bus', function(){
+		alert('You just clicked a font awesome icon');
+	}).addTo(map);
+	
   var magnifyingGlass = L.magnifyingGlass({
     radius: 50,
     zoomOffset: 1,
@@ -59,7 +67,7 @@ var locationLatLng = [0.0, 0.0];
     }
     map.addLayer(magnifyingGlass);
     magnifyingGlass.setLatLng(mouseEvt.latlng);
-  });
+  }); 
 }
 
 window.onload = init;
