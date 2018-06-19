@@ -1,3 +1,4 @@
+
 L.MagnifyingGlass = L.Layer.extend({
   options: {
     radius: 100,
