@@ -1,7 +1,7 @@
 .leaflet-magnifying-glass {
+  opacity: 0.9;
   border-radius: 50%;
-  border: 1px solid gray;
-  box-shadow: 0 0 5px gray;
+  border:  5px solid rgba(255,255,255,0.4) ;
   position: absolute;
   overflow: hidden;
   -moz-box-sizing: border-box;

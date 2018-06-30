@@ -1,4 +1,3 @@
-
 L.MagnifyingGlass = L.Layer.extend({
   options: {
     radius: 100,
@@ -35,7 +34,7 @@ L.MagnifyingGlass = L.Layer.extend({
       touchZoom: false,
       scrollWheelZoom: false,
       doubleClickZoom: false,
-      dragging: false,
+      dragging: true,
       keyboard: false,
     });
   },

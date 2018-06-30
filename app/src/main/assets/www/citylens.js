@@ -9,33 +9,16 @@ function init() {
 var locationLatLng = [0.0, 0.0];
 
 var map = new L.map('map', {
-    center: [50.9794934, 11.3235439],
-    zoom: 16,
+    center: [50, 10],
+    zoom: 5,
     layers: [
       L.tileLayer(tileUrl, tileOptions)
     ]
   }); 
   
-   L.easyButton('fa-bicycle', function(){
-		alert('You just clicked a font awesome icon');
-	}).addTo(map);
-
-	   L.easyButton('fa-bus', function(){
-		alert('You just clicked a font awesome icon');
-	}).addTo(map);
-	
-  var magnifyingGlass = L.magnifyingGlass({
-    radius: 50,
-    zoomOffset: 1,
-    layers: [ L.tileLayer(tile_pt)],
-    fixedPosition: true
-  });
-
- map.addLayer(magnifyingGlass);
- 
- map.locate({setView: true, maxZoom: 16});
-
- map.on('locationfound', function(e){
+   map.locate({setView: true, maxZoom: 16});
+  
+   map.on('locationfound', function(e){
 		locationLatLng = e.latlng;
 		map.setView(locationLatLng, 16);
 		magnifyingGlass.setLatLng(locationLatLng);
@@ -48,26 +31,64 @@ var map = new L.map('map', {
 	magnifyingGlass.setLatLng(locationLatLng);
 	})
 	
-    var magnifyingGlassCycle = L.magnifyingGlass({
-	  radius: 50,
+	L.easyButton('fa-location-arrow', function(){
+		map.locate({setView: true, maxZoom: 16});
+	}).addTo(map);
+
+	L.easyButton('fa-bus', function(){
+		if(map.hasLayer(magnifyingGlassCycle))
+		   map.removeLayer(magnifyingGlassCycle);
+		if(map.hasLayer(magnifyingGlass))
+			map.removeLayer(magnifyingGlass);
+		else{
+			map.addLayer(magnifyingGlass);
+			magnifyingGlass.setLatLng(locationLatLng);
+	   }
+	}).addTo(map);
+	
+   L.easyButton('fa-bicycle', function(){
+		if(map.hasLayer(magnifyingGlass))
+		   map.removeLayer(magnifyingGlass);
+		if(map.hasLayer(magnifyingGlassCycle))
+			map.removeLayer(magnifyingGlassCycle);
+		else{
+			map.addLayer(magnifyingGlassCycle);
+			magnifyingGlassCycle.setLatLng(locationLatLng);
+		}
+	}).addTo(map);
+	
+  var magnifyingGlass = L.magnifyingGlass({
+    radius: 60,
+    zoomOffset: 1,
+    layers: [ L.tileLayer(tile_pt)],
+    fixedPosition: false
+  });
+
+ var magnifyingGlassCycle = L.magnifyingGlass({
+	  radius: 60,
 	  zoomOffset: 1,
 	  layers: [L.tileLayer(tile_cycle)],
-	  fixedPosition: false,
+	  fixedPosition: false
+
   })
   
-  // make the glass disappear on click...
-  magnifyingGlass.on('click', function() {
-    map.removeLayer(magnifyingGlass);
-  })
+
+  //.
+  map.on('click', function(mouseEvt) {
+    if(map.hasLayer(magnifyingGlass))
+		magnifyingGlass.setLatLng(mouseEvt.latlng);
+	if(map.hasLayer(magnifyingGlassCycle))
+		magnifyingGlassCycle.setLatLng(mouseEvt.latlng);
+	})
 
   // ...and reappear on right click
-  map.on('contextmenu', function(mouseEvt) {
+ /* map.on('contextmenu', function(mouseEvt) {
     if(map.hasLayer(magnifyingGlass)) {
       return;
     }
     map.addLayer(magnifyingGlass);
     magnifyingGlass.setLatLng(mouseEvt.latlng);
-  }); 
+}); */
 }
 
 window.onload = init;

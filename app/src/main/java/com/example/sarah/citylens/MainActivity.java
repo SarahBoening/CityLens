@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+@SuppressLint("SetJavaScriptEnabled")
 private void initWebView(){
 
     webView = findViewById(R.id.webView);
