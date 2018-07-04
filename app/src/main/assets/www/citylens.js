@@ -13,7 +13,8 @@ var map = new L.map('map', {
     zoom: 5,
     layers: [
       L.tileLayer(tileUrl, tileOptions)
-    ]
+    ],
+	gestureHandling: true
   }); 
   
    map.locate({setView: true, maxZoom: 16});
@@ -60,35 +61,22 @@ var map = new L.map('map', {
   var magnifyingGlass = L.magnifyingGlass({
     radius: 60,
     zoomOffset: 1,
-    layers: [ L.tileLayer(tile_pt)],
-    fixedPosition: false
-  });
+    layers: [ L.tileLayer(tile_pt)]
+  })
 
  var magnifyingGlassCycle = L.magnifyingGlass({
 	  radius: 60,
 	  zoomOffset: 1,
-	  layers: [L.tileLayer(tile_cycle)],
-	  fixedPosition: false
+	  layers: [L.tileLayer(tile_cycle)]
 
   })
   
-
-  //.
   map.on('click', function(mouseEvt) {
     if(map.hasLayer(magnifyingGlass))
 		magnifyingGlass.setLatLng(mouseEvt.latlng);
 	if(map.hasLayer(magnifyingGlassCycle))
 		magnifyingGlassCycle.setLatLng(mouseEvt.latlng);
 	})
-
-  // ...and reappear on right click
- /* map.on('contextmenu', function(mouseEvt) {
-    if(map.hasLayer(magnifyingGlass)) {
-      return;
-    }
-    map.addLayer(magnifyingGlass);
-    magnifyingGlass.setLatLng(mouseEvt.latlng);
-}); */
 }
 
 window.onload = init;

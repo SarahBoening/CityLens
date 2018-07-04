@@ -34,7 +34,7 @@ L.MagnifyingGlass = L.Layer.extend({
       touchZoom: false,
       scrollWheelZoom: false,
       doubleClickZoom: false,
-      dragging: true,
+      dragging: false,
       keyboard: false,
     });
   },
