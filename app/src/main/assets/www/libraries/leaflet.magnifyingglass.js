@@ -53,8 +53,10 @@ L.MagnifyingGlass = L.Layer.extend({
   setRadius: function(radius) {
     this.options.radius = radius;
     if(this._wrapperElt) {
-      this._wrapperElt.style.width = this.options.radius * 2 + 'px';
-      this._wrapperElt.style.height = this.options.radius * 2 + 'px';
+    this._wrapperElt.style.width = this.options.radius * 2 + 'px';
+    this._wrapperElt.style.height = this.options.radius * 2 + 'px';
+	// this._wrapperElt.style.width = 16.0 + 'vh';
+    // this._wrapperElt.style.height = 16.0 + 'vh';
     }
   },
 
@@ -81,7 +83,7 @@ L.MagnifyingGlass = L.Layer.extend({
     // using the one provided or reprojecting it
     layerPoint = layerPoint || this._mainMap.latLngToLayerPoint(latLng);
     this._wrapperElt.style.left = layerPoint.x - this.options.radius + 'px';
-    this._wrapperElt.style.top = layerPoint.y - this.options.radius + 'px';
+    this._wrapperElt.style.top = layerPoint.y - 1.8 *this.options.radius + 'px';
   },
 
   /**
