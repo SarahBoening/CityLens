@@ -1,4 +1,4 @@
-# CityLens
+[logo]: https://github.com/SarahBoening/CityLens/blob/master/app/src/main/assets/www/CityLensLogo.png "CityLensLogo"
 ## MIS Project, Summerterm 2018
 ***
 
@@ -9,9 +9,9 @@ Pietriga, Emmanuel, and Caroline Appert. "Sigma lenses: focus-context transition
 ***
 Where to find what:
 - Source code of the app: app/src/main
-- APK: app/build/outputs/apk (todo)
-- Documentation: Additional Material (todo)
-- Presentation & video: Additional Material (todo)
+- APK: app/release and app/build/outputs/apk
+- Documentation: Additional Material
+- Presentation & video: Additional Material
 - Team names & matriculation numbers: Additional Material
 
 
