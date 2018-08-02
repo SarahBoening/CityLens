@@ -9,10 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.GeolocationPermissions;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,15 +17,16 @@ public class MainActivity extends AppCompatActivity {
     private static final String FINE_LOCATION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final String COURSE_LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
     private static final int LOCATION_PERMISSION_REQUEST_CODE = 1234;
-    private boolean mLocationPermissionsGranted = false;
-    WebView webView;
+    private static boolean mLocationPermissionsGranted = false;
+    private WebView webView;
+
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getLocationPermission();
         initWebView();
+        getLocationPermission();
 
     }
     private void getLocationPermission() {
@@ -40,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             if (ContextCompat.checkSelfPermission(this.getApplicationContext(),
                     COURSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 mLocationPermissionsGranted = true;
+                webView.loadUrl("file:///android_asset/www/index.html");
             } else {
                 ActivityCompat.requestPermissions(this,
                         permissions,
@@ -66,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     mLocationPermissionsGranted = true;
+                    webView.loadUrl("file:///android_asset/www/index.html");
                 }
             }
         }
@@ -84,25 +84,22 @@ public class MainActivity extends AppCompatActivity {
 private void initWebView(){
 
     webView = findViewById(R.id.webView);
-    //Allow JavaScript
+    webView.setVerticalScrollBarEnabled(false);
+    webView.setHorizontalScrollBarEnabled(false);
     webView.getSettings().setJavaScriptEnabled(true);
+    webView.getSettings().setAppCacheEnabled(true);
+    webView.getSettings().setDatabaseEnabled(true);
+    webView.getSettings().setDomStorageEnabled(true);
+    webView.getSettings().setGeolocationDatabasePath(getFilesDir().getPath());
     webView.getSettings().setGeolocationEnabled(true);
-    // Force Webview to open page and not open a browser
-    webView.setWebViewClient(new LensWebViewClient());
-    // https://medium.com/@xabaras/android-webview-handling-geolocation-permission-request-cc482f3de210
-    webView.setWebChromeClient(new WebChromeClient(){
-        @Override
-        public void onGeolocationPermissionsShowPrompt(final String origin, final GeolocationPermissions.Callback callback) {
-            if (!mLocationPermissionsGranted)
-                callback.invoke(origin, false, false);
-            else
-                callback.invoke(origin, true, true);
-            }
-    });
+    webView.setWebViewClient(new LensWebViewClient()); // Open page in Webview and not open a browser
+    webView.setWebChromeClient(new LensChromeClient());
 
-    webView.loadUrl("file:///android_asset/www/index.html");
 }
 
+public static boolean getPermissionStatus(){
+        return mLocationPermissionsGranted;
+}
     // Simple function to display and log errors/exceptions
     public void makeErrorLog(String error) {
         Log.e("MainActivity", error);
