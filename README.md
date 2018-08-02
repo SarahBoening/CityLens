@@ -1,4 +1,4 @@
-![logo](https://github.com/SarahBoening/CityLens/master/app/src/main/assets/www/CityLensLogo.png)
+![logo](https://github.com/SarahBoening/CityLens/blob/master/app/src/main/assets/www/CityLensLogo.png)
 ## MIS Project, Summerterm 2018
 ***
 
