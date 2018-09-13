@@ -6,9 +6,9 @@ function init() {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
     subdomains: '1234'
   };
-var locationLatLng = [0.0, 0.0];
+  var locationLatLng = [0.0, 0.0];
 
-var map = new L.map('map', {
+  var map = new L.map('map', {
     center: [50, 10],
     zoom: 5,
     layers: [
@@ -16,15 +16,17 @@ var map = new L.map('map', {
     ],
 	gestureHandling: true
   }); 
-  //get geolocation and set center of map to position
-   map.locate({setView: true, maxZoom: 16});
-  
+
    map.on('locationfound', function(e){
 		locationLatLng = e.latlng;
 		map.setView(locationLatLng, 16);
- })
-//no permission granted => set map to Weimar
- map.on('locationerror', function(e){
+		magnifyingGlass.setLatLng(locationLatLng);
+		magnifyingGlassPT.setLatLng(locationLatLng);
+        magnifyingGlassCycle.setLatLng(locationLatLng);
+	 })
+
+    //no permission granted => set map to Weimar
+   map.on('locationerror', function(e){
 		alert(e.message);
 		locationLatLng = [50.9794934, 11.3235439];
 		map.setView(locationLatLng, 16);
@@ -100,6 +102,11 @@ var map = new L.map('map', {
 
   })
   
+  // add normal magnifying lens as standard
+  map.addLayer(magnifyingGlass);
+  //get geolocation and set center of map to position
+  map.locate({setView: true, maxZoom: 16});
+
   // Set lens where tapped/clicked on map
   map.on('click', function(mouseEvt) {
 	if(map.hasLayer(magnifyingGlass))
