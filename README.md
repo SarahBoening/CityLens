@@ -12,5 +12,11 @@ Where to find what:
 - Documentation: Additional Material
 - Presentation & video: Additional Material
 - Team names & matriculation numbers: Additional Material
-
+***
+Installation:
+- download the apk from the directory
+- copy apk an your phone/emulutor
+- open apk and press 'install'
+- open CityLens app
+- done
 
