@@ -16,7 +16,7 @@ Where to find what:
 ***
 Installation:
 - Download the apk from the directory
-- Copy the apk to your phone/emulutor
+- Copy the apk to your phone/emulator
 - Open apk and press 'install'
 - Open CityLens app
 - Done!
